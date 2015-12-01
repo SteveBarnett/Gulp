@@ -23,8 +23,10 @@ gulp.task('uglify', function() {
 
 gulp.task('jscs', function() {
   return gulp.src(['./js/*.js', '!./js/*.min.js'])
+      .pipe(jscs({fix: true}))
       .pipe(jscs())
-      .pipe(jscs.reporter());
+      .pipe(jscs.reporter())
+      .pipe(gulp.dest('./js'));
 });
 
 
