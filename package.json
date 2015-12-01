@@ -1,0 +1,26 @@
+{
+  "name": "future-friendly-gulp",
+  "version": "0.0.1",
+  "description": "A setup for Front-endian things, with a focus on Future Friendlyness",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveBarnett/gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "futurefriendly"
+  ],
+  "author": "Steve Barnett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteveBarnett/gulp/issues"
+  },
+  "homepage": "https://github.com/SteveBarnett/gulp#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
