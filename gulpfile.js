@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     concat = require("gulp-concat"),
     jscs = require("gulp-jscs"),
     access = require('gulp-accessibility'),
-    htmlhint = require("gulp-htmlhint");
+    htmlhint = require("gulp-htmlhint"),
+    sass = require('gulp-sass');
 
 gulp.task('lint', function() {
   return gulp.src(['./js/*.js', '!./js/*.min.js'])
@@ -46,7 +47,14 @@ gulp.task('htmlhint', function() {
     .pipe(htmlhint.reporter())
 });
 
+gulp.task('sass', function () {
+  gulp.src('./sass/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(gulp.dest('./css'));
+});
+
 gulp.task('default', function() {
   gulp.watch('./js/*.js', ['lint', 'uglify']);
   gulp.watch('./*.html', ['access', 'htmlhint']);
+  gulp.watch('./sass/*.scss', ['sass']);
 });
