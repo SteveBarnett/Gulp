@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     rename = require("gulp-rename"),
-    concat = require("gulp-concat");
+    concat = require("gulp-concat"),
+    jscs = require("gulp-jscs");
 
 gulp.task('lint', function() {
   return gulp.src(['./js/*.js', '!./js/*.min.js'])
@@ -19,6 +20,13 @@ gulp.task('uglify', function() {
         }))
         .pipe(gulp.dest('./js'));
 });
+
+gulp.task('jscs', function() {
+  return gulp.src(['./js/*.js', '!./js/*.min.js'])
+      .pipe(jscs())
+      .pipe(jscs.reporter());
+});
+
 
 gulp.task('default', function() {
   gulp.watch('./js/*.js', ['lint', 'uglify']);
