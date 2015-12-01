@@ -1,0 +1,15 @@
+
+{
+  "bitwise": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "latedef": true,
+  "maxdepth": 2,
+  "maxparams": 3,
+  "maxstatements": 4,
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+  "predef": [ "Modernizr" ]
+}
