@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     rename = require("gulp-rename"),
     concat = require("gulp-concat"),
     jscs = require("gulp-jscs"),
-    access = require('gulp-accessibility');
+    access = require('gulp-accessibility'),
+    htmlhint = require("gulp-htmlhint");
 
 gulp.task('lint', function() {
   return gulp.src(['./js/*.js', '!./js/*.min.js'])
@@ -39,7 +40,13 @@ gulp.task('access', function() {
     ));
 });
 
+gulp.task('htmlhint', function() {
+  return gulp.src("./*.html")
+    .pipe(htmlhint())
+    .pipe(htmlhint.reporter())
+});
+
 gulp.task('default', function() {
   gulp.watch('./js/*.js', ['lint', 'uglify']);
-  gulp.watch('./*.html', ['access']);
+  gulp.watch('./*.html', ['access', 'htmlhint']);
 });
