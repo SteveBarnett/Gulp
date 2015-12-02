@@ -12,11 +12,15 @@ var gulp = require('gulp'),
     rename = require('gulp-rename');
 
 var config = {
+  cssdest: './css',
+  jsdest: './js',
   html: './*.html',
-  csslint: ['./css/main.css', '!./css/h5bp.css', '!./css/src/normalize.css'],
-  cssconcatandminify: ['./css/*.css'],
+  csslint: ['./css/*.css', '!./css/*.min.css', '!./css/h5bp.css', '!./css/normalize.css'],
+  cssconcatandminify: ['./css/*.css', '!./css/*.min.css'],
   sass: './sass/*.scss',
-  js: ['./js/*.js', '!./js/*.min.js']
+  js: ['./js/*.js', '!./js/*.min.js'],
+  cssdestname: 'style',
+  jsdestname: 'main'
 };
 
 // HTML
@@ -48,9 +52,9 @@ gulp.task('css:lint', function () {
 // concat and minify
 gulp.task('css:concatandminify', function () {
   return gulp.src(config.cssconcatandminify)
-    .pipe(concatcss('style.min.css'))
+    .pipe(concatcss(cssdestname + '.min.css'))
     .pipe(minifycss())
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest(config.cssdest));
 });
 
 // Sass
@@ -61,7 +65,7 @@ gulp.task('sass', function () {
     .pipe(rename({
       extname: '.min.css'
     }))
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest(config.cssdest));
 });
 
 // JavaScript
@@ -85,20 +89,29 @@ gulp.task('js:jscs', function() {
 // uglify
 gulp.task('js:uglify', function() {
   return gulp.src(config.js)
-    .pipe(concat('main.js'))
+    .pipe(concat(jsdestname + '.js'))
     .pipe(uglify())
     .pipe(rename({
       extname: '.min.js'
     }))
-    .pipe(gulp.dest('./js'));
+    .pipe(gulp.dest(config.jsdest));
 });
 
 // lint all the things
-gulp.task('default', function() {
-  gulp.watch('./*.html', ['html:hint', 'html:accessibility']);
-  gulp.watch(['./css/*.css'], ['css:lint']);
-  gulp.watch('./js/*.js', ['js:lint', 'js:jscs']);
+gulp.task('default',
+  ['html:hint',
+  'html:accessibility',
+  'css:lint',
+  'js:lint',
+  'js:jscs'
+]);
+
+gulp.task('watch', function() {
+  gulp.watch(config.html, ['html:hint', 'html:accessibility']);
+  gulp.watch(config.csslint, ['css:lint']);
+  gulp.watch(config.js, ['js:lint', 'js:jscs']);
 });
+
 
 // build all the things
 gulp.task('build', ['css:concatandminify', 'sass', 'js:uglify']);
