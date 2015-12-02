@@ -7,9 +7,9 @@
   "latedef": true,
   "maxdepth": 2,
   "maxparams": 3,
-  "maxstatements": 4,
+  "maxstatements": 10,
   "noarg": true,
   "undef": true,
   "unused": true,
-  "predef": [ "Modernizr" ]
+  "predef": [ "Modernizr", "window" ]
 }
