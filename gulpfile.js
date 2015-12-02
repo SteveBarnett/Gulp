@@ -1,21 +1,21 @@
 var gulp = require('gulp'),
-    htmlhint = require("gulp-htmlhint"),
+    htmlhint = require('gulp-htmlhint'),
     access = require('gulp-accessibility'),
     csslint = require('gulp-csslint'),
     concatcss = require('gulp-concat-css'),
     minifycss = require('gulp-minify-css'),
     sass = require('gulp-sass'),
     jshint = require('gulp-jshint'),
-    jscs = require("gulp-jscs"),
-    concat = require("gulp-concat"),
+    jscs = require('gulp-jscs'),
+    concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    rename = require("gulp-rename");
+    rename = require('gulp-rename');
 
 // HTML
 
 // hint
 gulp.task('html:hint', function() {
-  return gulp.src("./*.html")
+  return gulp.src('./*.html')
     .pipe(htmlhint())
     .pipe(htmlhint.reporter())
 });
